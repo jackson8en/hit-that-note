@@ -2,26 +2,31 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+    /* https://coolors.co/ffffff-81f4e1-f96e46-56cbf9-d3c4d1 */
+    --color-primary: 41 41 41;
+    --color-secondary: 255 255 255;
+    --color-tertiary: 211 196 209;
+    --color-accent: 249 110 70;
+    --color-accent-light: 129 244 225;
+    --color-accent-dark: 86 203 249;
   }
-}
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+  @media (prefers-color-scheme: dark) {
+    :root {
+      /* https://coolors.co/000000-7e0b1e-0691b9-a93406-2c3b2e */
+      --color-primary: 214 214 214;
+      --color-secondary: 0 0 0;
+      --color-tertiary: 44 59 46;
+      --color-accent: 6 145 185;
+      --color-accent-light: 126 11 30;
+      --color-accent-dark: 169 52 6;
+    }
+  }
+
+  body {
+    color: rgb(var(--color-primary));
+    background-color: rgb(var(--color-secondary));
+  }
 }

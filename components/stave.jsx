@@ -1,3 +1,4 @@
+import Image from "next/image"
 
 export default function StaveDisplay() {
 
@@ -6,27 +7,39 @@ export default function StaveDisplay() {
 
   return (
     <>
-      <div className="flex items-end">
-        <Stave notes={trebleNotes}/>
-        <Stave notes={bassNotes}/>
+      <div className="flex items-end gap-16">
+        <Staff notes={trebleNotes}/>
+        <Staff notes={bassNotes}/>
       </div>
     </>
   )
 }
 
-function Stave({ notes }) {
+function Staff({ notes }) {
   return (
-    <ul className="flex flex-col-reverse">
+    <ul className="flex flex-col-reverse items-center">
       {notes.map((val, idx) => {
-        return (<StaveLine key={idx} srVal={val} srIdx={idx} />)
+        return (<StaffLine key={idx} srVal={val} srIdx={idx} />)
       })}
     </ul>
   )
 }
 
-function StaveLine({ srVal, srIdx }) {
-  const staffLineStyle = "bg-gradient-to-t from-transparent from-45% via-primary via-50% to-transparent to-55%"
+function StaffLine({ srVal, srIdx }) {
+  const staffLineStyle = "bg-gradient-to-t from-transparent from-45% via-primary via-50% to-transparent to-55% w-fit"
   return (
-    <div key={srIdx} className={srIdx % 2 == 0 ? staffLineStyle : ""}>{srVal}</div>
+    <div key={srIdx} className={srIdx % 2 == 0 ? staffLineStyle : ""}>
+      {/* {srVal} */}
+      <Image
+        src={"notes/blank.svg"}
+        width={isFloatingStaffLine(srIdx) ? 32 : 256}
+        height={16}
+        alt=""
+        />
+    </div>
   )
+}
+
+function isFloatingStaffLine(rowIndex){
+  return rowIndex < 4 || rowIndex > 12
 }

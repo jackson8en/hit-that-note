@@ -5,23 +5,50 @@ export default function StaveDisplay() {
   const trebleNotes = "ABCDEFGABCDEFGABCD".split('')
   const bassNotes = "CDEFGABCDEFGABCDE".split('')
 
+  // https://www.svgrepo.com/collection/music-symbols/
+
   return (
     <>
       <div className="flex items-end gap-16">
-        <Staff notes={trebleNotes}/>
-        <Staff notes={bassNotes}/>
+        <Staff notes={trebleNotes} clef={"treble"}/>
+        <Staff notes={bassNotes} clef={"bass"}/>
       </div>
     </>
   )
 }
 
-function Staff({ notes }) {
+//TODO: Convert these to importable components. This will allow for themed coloring and other options
+// including optimizations that the Next/Image element doesn't do.
+const trebleClef = (
+  <Image
+        src={"treble-clef.svg"}
+        width={224}
+        height={224}
+        alt={""}
+        className="absolute top-[50px] -left-[72px]"
+      />
+)
+
+const bassClef = (
+  <Image
+        src={"bass-clef.svg"}
+        width={112}
+        height={112}
+        alt={""}
+        className="absolute top-[72px] -left-[8px]"
+      />
+)
+
+function Staff({ notes, clef }) {
   return (
-    <ul className="flex flex-col-reverse items-center">
-      {notes.map((val, idx) => {
-        return (<StaffLine key={idx} srVal={val} srIdx={idx} />)
-      })}
-    </ul>
+    <div className="relative">
+      <ul className="flex flex-col-reverse items-center">
+        {notes.map((val, idx) => {
+          return (<StaffLine key={idx} srVal={val} srIdx={idx} />)
+        })}
+      </ul>
+      {clef === "bass" ? bassClef : trebleClef}
+    </div>
   )
 }
 
